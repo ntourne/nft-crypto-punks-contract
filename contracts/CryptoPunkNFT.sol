@@ -17,13 +17,13 @@ contract CryptoPunkNFT is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     event NFTMinted(address sender, uint256 tokenId);
 
-    constructor(uint256 _maxSupply, string memory __baseURI)
+    constructor(uint256 _maxSupply, string memory _newBaseURI)
         ERC721("Crypto Punk", "PUNK")
     {
         // It increments tokenIds counter so first NFT minted starts with 1 instead of 0
         _tokenIdCounter.increment();
 
-        baseURI = __baseURI;
+        baseURI = _newBaseURI;
         maxSupply = _maxSupply;
     }
 
@@ -79,7 +79,7 @@ contract CryptoPunkNFT is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
         override(ERC721, ERC721URIStorage)
         returns (string memory)
     {
-        return super.tokenURI(tokenId);
+        return string(abi.encodePacked(super.tokenURI(tokenId), ".json"));
     }
 
     function supportsInterface(bytes4 interfaceId)

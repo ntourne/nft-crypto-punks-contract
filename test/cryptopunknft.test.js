@@ -64,7 +64,7 @@ describe('CryptoPunkNFT', () => {
     it('Should return baseUri', async () => {
         const { minterContract, alice } = await deploy();
         await minterContract.mint(alice.address);
-        await expect(await minterContract.tokenURI(1)).to.equals(BASE_URI + 1, 'Incorrect token URI');
+        await expect(await minterContract.tokenURI(1)).to.equals(BASE_URI + "1.json", 'Incorrect token URI');
     });
 
     it('Should change baseURI', async () => {

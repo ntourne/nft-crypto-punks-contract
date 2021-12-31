@@ -1,6 +1,7 @@
 require("@nomiclabs/hardhat-waffle");
 require('dotenv').config();
 require("solidity-coverage");
+require("@nomiclabs/hardhat-etherscan");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -21,6 +22,10 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 module.exports = {
   solidity: "0.8.2",
   networks: {
+    rinkeby: {
+      url: process.env.ALCHEMY_RINKEBY_URL, //Infura url with projectId
+      accounts: [process.env.PRIVATE_KEY] // add the account that will deploy the contract (private key)
+    },
     bscTestnet: {
       url: "https://data-seed-prebsc-1-s1.binance.org:8545",
       chainId: 97,
@@ -28,4 +33,9 @@ module.exports = {
       accounts: { mnemonic: process.env.MNEMONIC }
     },
   },
+  etherscan: {
+    // Your API key for Etherscan
+    // Obtain one at https://etherscan.io/
+    apiKey: process.env.ETHERSCAN_API_KEY
+  }
 };
